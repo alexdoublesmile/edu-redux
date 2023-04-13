@@ -39,7 +39,7 @@ const App = (params) => {
                             Change title
                         </button>
                         <button onClick={() => deleteTask(el.id)}>
-                            Delete task
+                            Delete
                         </button>
                         <hr />
                     </li>
