@@ -6,8 +6,11 @@ module.exports = {
     extends: ["plugin:react/recommended", "standard"],
     overrides: [],
     parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module"
+        ecmaVersion: 13,
+        sourceType: "module",
+        "ecmaFeatures": {
+            "jsx": true
+          }
     },
     plugins: ["react"],
     rules: {
