@@ -3,7 +3,7 @@ import userService from "../services/user.service";
 import authService from "../services/auth.service";
 import localStorageService from "../services/localStorage.service";
 import getRandomInt from "../utils/getRandomInt";
-// import history from "../utils/history";
+import history from "../utils/history";
 // import { generateAuthError } from "../utils/generateAuthError";
 
 // const initialState = localStorageService.getAccessToken()

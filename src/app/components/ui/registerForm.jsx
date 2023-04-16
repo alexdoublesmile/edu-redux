@@ -5,38 +5,33 @@ import SelectField from "../common/form/selectField";
 import RadioField from "../common/form/radioField";
 import MultiSelectField from "../common/form/multiSelectField";
 import CheckBoxField from "../common/form/checkBoxField";
-import { useAuth } from "../../hooks/useAuth";
-import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getQualities } from "../../store/qualities";
 import { getProfessions } from "../../store/professions";
+import { signUp } from "../../store/users";
 
 const RegisterForm = () => {
+    const dispatch = useDispatch();
     const [data, setData] = useState({
-        name: "",
         email: "",
         password: "",
         profession: "",
         sex: "male",
+        name: "",
         qualities: [],
         licence: false
     });
-
     const qualities = useSelector(getQualities());
-    const qualitiesList = qualities.map(q => ({
+    const qualitiesList = qualities.map((q) => ({
         label: q.name,
         value: q._id
     }));
-
     const professions = useSelector(getProfessions());
-    const professionList = professions.map(profession => ({
-        label: profession.name,
-        value: profession._id
+    const professionsList = professions.map((p) => ({
+        label: p.name,
+        value: p._id
     }));
-
-    const { signUp } = useAuth();
     const [errors, setErrors] = useState({});
-    const history = useHistory();
 
     const handleChange = (target) => {
         setData((prevState) => ({
@@ -44,23 +39,22 @@ const RegisterForm = () => {
             [target.name]: target.value
         }));
     };
-
     const validatorConfig = {
-        name: {
-            isRequired: {
-                message: "Name is required"
-            },
-            min: {
-                message: "Too short name (3 symbols min)",
-                value: 3
-            }
-        },
         email: {
             isRequired: {
                 message: "Электронная почта обязательна для заполнения"
             },
             isEmail: {
                 message: "Email введен некорректно"
+            }
+        },
+        name: {
+            isRequired: {
+                message: "Имя обязательно для заполнения"
+            },
+            min: {
+                message: "Имя должно состоять минимум из 3 символов",
+                value: 3
             }
         },
         password: {
@@ -90,37 +84,25 @@ const RegisterForm = () => {
             }
         }
     };
-
     useEffect(() => {
         validate();
     }, [data]);
-
     const validate = () => {
         const errors = validator(data, validatorConfig);
         setErrors(errors);
         return Object.keys(errors).length === 0;
     };
-
     const isValid = Object.keys(errors).length === 0;
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
-
         const newData = {
             ...data,
-            qualities: data.qualities.map(q => q.value)
+            qualities: data.qualities.map((q) => q.value)
         };
-
-        console.log("Submit data: ", newData);
-
-        try {
-            await signUp(newData);
-            history.push("/");
-        } catch (error) {
-            setErrors(error);
-        }
+        dispatch(signUp(newData));
     };
 
     return (
@@ -133,7 +115,7 @@ const RegisterForm = () => {
                 error={errors.email}
             />
             <TextField
-                label="Name"
+                label="Имя"
                 name="name"
                 value={data.name}
                 onChange={handleChange}
@@ -150,7 +132,7 @@ const RegisterForm = () => {
             <SelectField
                 label="Выбери свою профессию"
                 defaultOption="Choose..."
-                options={professionList}
+                options={professionsList}
                 name="profession"
                 onChange={handleChange}
                 value={data.profession}
