@@ -36,4 +36,7 @@ export const loadQualities = () => async(dispatch) => {
     }
 };
 
+export const getQualities = () => (state) => state.qualities.entities;
+export const getQualitiesLoadingStatus = () => (state) => state.qualities.isLoading;
+
 export default qualitiesReducer;
