@@ -9,7 +9,7 @@ const httpAuth = axios.create({
 });
 
 const authService = {
-    register: async ({ email, password }) => {
+    register: async({ email, password }) => {
         const { data } = await httpAuth.post(`accounts:signUp`, {
             email,
             password,
@@ -17,7 +17,7 @@ const authService = {
         });
         return data;
     },
-    login: async ({ email, password }) => {
+    login: async({ email, password }) => {
         const { data } = await httpAuth.post(`accounts:signInWithPassword`, {
             email,
             password,
@@ -25,7 +25,7 @@ const authService = {
         });
         return data;
     },
-    refresh: async () => {
+    refresh: async() => {
         const { data } = await httpAuth.post("token", {
             grant_type: "refresh_token",
             refresh_token: localStorageService.getRefreshToken()
