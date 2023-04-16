@@ -27,7 +27,7 @@ const { reducer: professionsReducer, actions } = professionsSlice;
 const { professionsRequested, professionsReceived, professionsRequestFailed } =
     actions;
 
-export const getProfessions = () => async(dispatch) => {
+export const loadProfessions = () => async(dispatch) => {
     dispatch(professionsRequested());
     try {
         const { content } = await professionService.get();
@@ -37,5 +37,8 @@ export const getProfessions = () => async(dispatch) => {
         dispatch(professionsRequestFailed(error.message));
     }
 };
+
+export const getProfessions = () => (state) => state.professions.entities;
+export const getProfessionsLoadingStatus = () => (state) => state.professions.isLoading;
 
 export default professionsReducer;
