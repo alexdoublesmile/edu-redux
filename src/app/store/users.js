@@ -63,10 +63,10 @@ const usersSlice = createSlice({
             state.entities[
                 state.entities.findIndex((u) => u._id === action.payload._id)
             ] = action.payload;
+        },
+        authRequested: (state) => {
+            state.error = null;
         }
-        // authRequested: (state) => {
-        //     state.error = null;
-        // }
     }
 });
 
@@ -79,10 +79,10 @@ const {
     userCreated,
     userLoggedOut,
     authRequestFailed,
-    userUpdateSuccessed
+    userUpdateSuccessed,
+    authRequested
 } = actions;
 
-const authRequested = createAction("users/authRequested");
 const userCreateRequested = createAction("users/userCreateRequested");
 const createUserFailed = createAction("users/createUserFailed");
 const userUpdateRequested = createAction("users/userUpdateRequested");
