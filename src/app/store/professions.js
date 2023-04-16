@@ -32,7 +32,6 @@ export const loadProfessions = () => async(dispatch) => {
     try {
         const { content } = await professionService.get();
         dispatch(professionsReceived(content));
-        
     } catch (error) {
         dispatch(professionsRequestFailed(error.message));
     }

@@ -31,6 +31,7 @@ const EditUserPage = () => {
         label: p.name,
         value: p._id
     }));
+
     const [errors, setErrors] = useState({});
     const handleSubmit = async(e) => {
         e.preventDefault();
