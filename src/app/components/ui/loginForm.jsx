@@ -13,7 +13,7 @@ const LoginForm = () => {
     });
     const [errors, setErrors] = useState({});
     const [enterError, setEnterError] = useState(null);
-    const { signIn } = useAuth();
+    const { logIn } = useAuth();
     const history = useHistory();
 
     const handleChange = (target) => {
@@ -51,7 +51,7 @@ const LoginForm = () => {
         if (!isValid) return;
         console.log(data);
         try {
-            await signIn(data);
+            await logIn(data);
             history.push(
                 history.location.state
                     ? history.location.state.from.pathname
