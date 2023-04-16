@@ -8,21 +8,21 @@ import { generateAuthError } from "../utils/generateAuthError";
 
 const initialState = localStorageService.getAccessToken()
     ? {
-          entities: null,
-          isLoading: true,
-          error: null,
-          auth: { userId: localStorageService.getUserId() },
-          isLoggedIn: true,
-          dataLoaded: false
-      }
+        entities: null,
+        isLoading: true,
+        error: null,
+        auth: { userId: localStorageService.getUserId() },
+        isLoggedIn: true,
+        dataLoaded: false
+    }
     : {
-          entities: null,
-          isLoading: false,
-          error: null,
-          auth: null,
-          isLoggedIn: false,
-          dataLoaded: false
-      };
+        entities: null,
+        isLoading: false,
+        error: null,
+        auth: null,
+        isLoggedIn: false,
+        dataLoaded: false
+    };
 
 const usersSlice = createSlice({
     name: "users",
