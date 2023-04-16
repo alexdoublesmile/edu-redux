@@ -25,19 +25,13 @@ const UsersListPage = () => {
     const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
     const pageSize = 8;
 
-    const handleDelete = (userId) => {
-        // setUsers(users.filter((user) => user._id !== userId));
-        console.log(userId);
-    };
     const handleToggleBookMark = (id) => {
-        const newArray = users.map((user) => {
+        users.map((user) => {
             if (user._id === id) {
                 return { ...user, bookmark: !user.bookmark };
             }
             return user;
         });
-        // setUsers(newArray);
-        console.log(newArray);
     };
 
     useEffect(() => {
@@ -46,6 +40,7 @@ const UsersListPage = () => {
 
     const handleProfessionSelect = (item) => {
         if (searchQuery !== "") setSearchQuery("");
+        console.log(item);
         setSelectedProf(item);
     };
     const handleSearchQuery = ({ target }) => {
@@ -73,7 +68,7 @@ const UsersListPage = () => {
                     ? data.filter(
                         (user) =>
                             JSON.stringify(user.profession) ===
-                            JSON.stringify(selectedProf)
+                            JSON.stringify(selectedProf._id)
                     )
                     : data;
             return filteredUsers.filter((u) => u._id !== currentUserId);
@@ -122,7 +117,6 @@ const UsersListPage = () => {
                             users={usersCrop}
                             onSort={handleSort}
                             selectedSort={sortBy}
-                            onDelete={handleDelete}
                             onToggleBookMark={handleToggleBookMark}
                         />
                     )}
