@@ -10,13 +10,13 @@ import { QualitiesProvider } from "./hooks/useQualities";
 import AuthProvider from "./hooks/useAuth";
 import ProtectedRoute from "./components/common/protectedRoute";
 import LogOut from "./layouts/logOut";
-import { loadQualities } from "./store/qualities";
+import { loadQualitiesList } from "./store/qualities";
 import { useDispatch } from "react-redux";
 
 function App() {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(loadQualities());
+        dispatch(loadQualitiesList());
     });
 
     return (
