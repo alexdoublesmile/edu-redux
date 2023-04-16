@@ -4,7 +4,7 @@ import authService from "../services/auth.service";
 import localStorageService from "../services/localStorage.service";
 import getRandomInt from "../utils/getRandomInt";
 import history from "../utils/history";
-// import { generateAuthError } from "../utils/generateAuthError";
+import { generateAuthError } from "../utils/generateAuthError";
 
 // const initialState = localStorageService.getAccessToken()
 //     ? {
@@ -94,26 +94,26 @@ const createUserFailed = createAction("users/createUserFailed");
 // const userUpdateRequested = createAction("users/userUpdateRequested");
 // const userUpdateFailed = createAction("users/userUpdateFailed");
 
-// export const login =
-//     ({ payload, redirect }) =>
-//     async (dispatch) => {
-//         const { email, password } = payload;
-//         dispatch(authRequested());
-//         try {
-//             const data = await authService.login({ email, password });
-//             dispatch(authRequestSuccess({ userId: data.localId }));
-//             localStorageService.setTokens(data);
-//             history.push(redirect);
-//         } catch (error) {
-//             const { code, message } = error.response.data.error;
-//             if (code === 400) {
-//                 const errorMessage = generateAuthError(message);
-//                 dispatch(authRequestFailed(errorMessage));
-//             } else {
-//                 dispatch(authRequestFailed(error.message));
-//             }
-//         }
-//     };
+export const login =
+    ({ payload, redirect }) =>
+        async(dispatch) => {
+            const { email, password } = payload;
+            dispatch(authRequested());
+            try {
+                const data = await authService.login({ email, password });
+                dispatch(authRequestSuccess({ userId: data.localId }));
+                localStorageService.setTokens(data);
+                history.push(redirect);
+            } catch (error) {
+                const { code, message } = error.response.data.error;
+                if (code === 400) {
+                    const errorMessage = generateAuthError(message);
+                    dispatch(authRequestFailed(errorMessage));
+                } else {
+                    dispatch(authRequestFailed(error.message));
+                }
+            }
+        };
 
 export const signUp =
     ({ email, password, ...rest }) =>
