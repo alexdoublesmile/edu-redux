@@ -1,14 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Quality from "./quality";
-import { 
-    // useDispatch, 
-    useSelector 
-} from "react-redux";
+import { useSelector } from "react-redux";
 import {
     getQualitiesByIds,
-    getQualitiesLoadingStatus,
-    // loadQualitiesList
+    getQualitiesLoadingStatus
 } from "../../../store/qualities";
 
 const QualitiesList = ({ qualities }) => {
