@@ -26,7 +26,11 @@ import userService from "../services/user.service";
 
 const usersSlice = createSlice({
     name: "users",
-    initialState,
+    initialState: {
+        entities: null,
+        isLoading: true,
+        error: null
+    },
     reducers: {
         usersRequested: (state) => {
             state.isLoading = true;
